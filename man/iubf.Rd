@@ -40,7 +40,7 @@ See example below for more details.}
 \item{rw.sd}{specification of the magnitude of the random-walk perturbations that will be applied to some or all model parameters.
 Parameters that are to be estimated should have positive perturbations specified here.
 The specification is given using the \code{\link[pomp]{rw_sd}} function, which creates a list of unevaluated expressions.
-The latter are evaluated in a context where the model time variable is defined (as \code{time}).
+The latter are evaluated in a context where vector of observation times is visible (as \sQuote{\code{time}}).
 The expression \code{ivp(s)} can be used in this context as shorthand for \preformatted{ifelse(time==time[1],s,0).}
 Likewise, \code{ivp(s,lag)} is equivalent to \preformatted{ifelse(time==time[lag],s,0).}
 See below for some examples.
@@ -57,7 +57,8 @@ See below (under \dQuote{Specifying the perturbations}) for more detail.}
 
 \item{verbose}{logical; if \code{TRUE}, diagnostic messages will be printed to the console.}
 
-\item{...}{additional arguments are passed to \code{\link[pomp]{pomp}}.}
+\item{...}{additional arguments are passed to \code{\link[pomp]{pomp}}.
+This allows one to set, unset, or modify \link[pomp:basic_components]{basic model components} within a call to this function.}
 }
 \value{
 Upon successful completion, \code{iubf()} returns an object of class
