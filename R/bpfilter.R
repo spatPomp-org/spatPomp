@@ -321,8 +321,17 @@ bpfilter.internal <- function (object, Np, block_list, save_states, filter_traj,
       )
       log_d <- apply(log_vd[,,1,drop=FALSE], 2, function(x) sum(x))
       max_log_d[i] <- max(log_d)
-      log_d <- log_d - max_log_d[i]
-      weights[i,] <- exp(log_d)
+      if (is.infinite(max_log_d[i])) {
+        ## All particle log-likelihoods are -Inf => weights are all 0
+        ## To avoid NaN and be easy for resampling step
+        ## If weights are equal, systematic resampling leaves particles unchanged
+        ## The block log-likelihood is set to -Inf later, so the value set here is immaterial
+        weights[i, ] <- rep(1, Np[nt+1])
+      } else {
+        ## Normal situation
+        log_d <- log_d - max_log_d[i]
+        weights[i, ] <- exp(log_d)
+      }
     }
     gnsi <- FALSE
 
@@ -356,10 +365,19 @@ bpfilter.internal <- function (object, Np, block_list, save_states, filter_traj,
 
     }
     if (save_states) saved.states[[nt]] <- x
-    log_weights = max_log_d + log(weights)
-    block_log_weights <- apply(log_weights,1,logmeanexp)
-    loglik[nt] = sum(block_log_weights)
-    block.loglik[,nt] <- block_log_weights
+    log_weights <- matrix(0, nrow=nblocks, ncol=Np[nt+1])
+    for (i in seq_len(nblocks)) {
+      ## For block-level log-likelihood, need logmeanexp( max_log_d[i] + log(weights[i,]) )
+      ## Note if max_log_d[i] == -Inf, it means the block log-likelihood at this time is -Inf
+      if (is.infinite(max_log_d[i])) {
+        ## Directly record as -Inf
+        block.loglik[i, nt] <- -Inf
+      } else {
+        log_weights[i, ] <- max_log_d[i] + log(weights[i, ])
+        block.loglik[i, nt] <- logmeanexp(log_weights[i, ])
+      }
+    }
+    loglik[nt] <- sum(block.loglik[, nt])
   } ## end of main loop
 
   if (filter_traj) { ## select a single trajectory
