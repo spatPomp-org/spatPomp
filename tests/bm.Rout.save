@@ -1,7 +1,7 @@
 
-R version 4.4.1 (2024-06-14) -- "Race for Your Life"
+R version 4.4.2 (2024-10-31) -- "Pile of Leaves"
 Copyright (C) 2024 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin20
+Platform: aarch64-apple-darwin20
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -249,7 +249,7 @@ name  [,1]   [,2]   [,3]   [,4]   [,5]
 > b_bpfilter_inf <- bpfilter(b_model_zero_dmeasure, Np = Np, block_size = 1)
 > paste("bm bpfilter loglik, zero measurement: ",
 +   round(logLik(b_bpfilter_inf),10))
-[1] "bm bpfilter loglik, zero measurement:  NaN"
+[1] "bm bpfilter loglik, zero measurement:  -Inf"
 > 
 > ## test bpfilter error messages
 > try(bpfilter())
