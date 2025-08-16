@@ -25,7 +25,7 @@ studied by He et al., the 10 largest and 10 selected smaller towns.}
 
 \item{Tmax}{Upper time for the window used to construct the object. The lower time is fixed at 1950.0. The default value matches He et al (2010).}
 
-\item{expandedParNames}{specifies the names of parameters which take unit-specific values. Remaining parameters take a single, shared value for all units.}
+\item{expandedParNames}{specifies the names of parameters which take unit-specific values. Remaining parameters take a single, shared value for all units. When applying \code{ibpf}, both shared and unit-specific parameters should be expanded, and non-expanded parameters must be fixed rather than estimated.}
 
 \item{basic_params}{A candidate parameter vector in the basic format, i.e., no unit-specific parameters or unit-related name extensions.}
 

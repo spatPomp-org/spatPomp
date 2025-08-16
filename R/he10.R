@@ -30,7 +30,7 @@
 #' @importFrom utils data read.csv write.table
 #' @param dt a numeric (in unit of years) that is used as the Euler time-increment for simulating measles data.
 #' @param Tmax Upper time for the window used to construct the object. The lower time is fixed at 1950.0. The default value matches He et al (2010).
-#' @param expandedParNames specifies the names of parameters which take unit-specific values. Remaining parameters take a single, shared value for all units.
+#' @param expandedParNames specifies the names of parameters which take unit-specific values. Remaining parameters take a single, shared value for all units. When applying \code{ibpf}, both shared and unit-specific parameters should be expanded, and non-expanded parameters must be fixed rather than estimated. 
 #' @param basic_params A candidate parameter vector in the basic format, i.e., no unit-specific parameters or unit-related name extensions.
 #' @param towns_selected A numeric vector of towns to be modeled. Defaults 
 #' to 1:U, with cities ranked by decreasing population and 1 being London.
@@ -93,7 +93,9 @@
 #' @export
 
 he10 <- function(U=6,dt=2/365, Tmax=1964,
-  expandedParNames=c("alpha","iota","R0","cohort","amplitude","gamma","sigma","sigmaSE","rho","psi","g","S_0","E_0","I_0"),
+  expandedParNames=c("alpha","iota","R0","cohort",
+    "amplitude","gamma","sigma","sigmaSE","rho",
+    "psi","g","S_0","E_0","I_0"),
   basic_params =c(
     alpha = 1,
     iota = 0,  
