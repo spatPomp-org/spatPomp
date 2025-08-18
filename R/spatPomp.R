@@ -219,7 +219,7 @@ setMethod(
     names(tmp) <- unit_names
     pomp_data <- data |> dplyr::mutate(ui = tmp[match(data[[unitname]], names(tmp))])
     pomp_data <- pomp_data |> tidyr::gather(unit_obsnames, key = 'obsname', value = 'val') |> dplyr::arrange_at(c(timename,'obsname','ui'))
-    pomp_data <- pomp_data |> dplyr::mutate(obsname = paste0(.data$obsname,.data$ui)) |> dplyr::select(-upos) |> dplyr::select(-.data$ui)
+	pomp_data <- pomp_data |> dplyr::mutate(obsname = paste0(.data$obsname,.data$ui)) |> dplyr::select(-all_of(units)) |> dplyr::select(-.data$ui)
     pomp_data <- pomp_data |> tidyr::spread(key = .data$obsname, value = .data$val)
     dat_col_order <- vector(length = U*length(unit_obsnames))
     for(oti in seq_along(unit_obsnames)){
@@ -257,7 +257,7 @@ setMethod(
         names(tmp) <- unit_names
         pomp_covar <- covar |> dplyr::mutate(ui = match(covar[[unitname]], names(tmp)))
         pomp_covar <- pomp_covar |> tidyr::gather(unit_covarnames, key = 'covname', value = 'val')
-        pomp_covar <- pomp_covar |> dplyr::mutate(covname = paste0(.data$covname,.data$ui)) |> dplyr::select(-upos_cov) |> dplyr::select(-.data$ui)
+		pomp_covar <- pomp_covar |> dplyr::mutate(covname = paste0(.data$covname,.data$ui)) |> dplyr::select(-all_of(unitname)) |> dplyr::select(-.data$ui)
         pomp_covar <- pomp_covar |> tidyr::spread(key = .data$covname, value = .data$val)
         for(cn in unit_covarnames){
           for(i in seq_len(U)){
