@@ -6,8 +6,8 @@ c(
   bibentry(
     header=paste("To cite the",sQuote("spatPomp"),
       "package in publications, please use:"),
-    bibtype = "misc",
-    title = "Partially observed Markov processes with spatial structure via the {R} package {spatPomp}",
+    bibtype = "article",
+    title = "spatPomp: An R package for spatiotemporal partially observed Markov process models",
     author = c(
       person(given = "Kidus", family = "Asfaw"),
       person(given = "Joonha", family = "Park"),
@@ -15,10 +15,10 @@ c(
       person(given = "Edward", family = "Ionides",
         email = "ionides@umich.edu")
     ),
-    year={2023},
-    eprint={2101.01157},
-    archivePrefix={"arXiv"},
-    primaryClass={"stat.ME"}
+    year="2024",
+    journal="Journal of Open Source Software",
+    volume="9",
+    pages="7008"
   ),
   bibentry(
     header="To cite the package itself:",
