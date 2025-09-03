@@ -26,5 +26,6 @@ To install the package from this GitHub source, type the following command into 
 The CRAN version of `spatPomp` can be installed by `install.packages("spatPomp")`.
 
 ## Documentation
-Details on the motivation and use of this package can be found in Asfaw et al. (2021) (https://arxiv.org/abs/2101.01157).
-Further information can be found on the [`spatPomp` website](https://spatPomp-org.github.io/spatPomp/).
+An overview of the package and its motivation can be found in [Asfaw et al. (2024, _Journal of Open Source Software_)[https://doi.org/10.21105/joss.07008].
+A longer tutorial is at [https://arxiv.org/abs/2101.01157](https://arxiv.org/abs/2101.01157).
+For further information, including a bibliography, see the [`spatPomp` website](https://spatPomp-org.github.io/spatPomp/).
